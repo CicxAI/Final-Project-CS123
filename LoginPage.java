@@ -17,9 +17,10 @@ import java.io.IOException;
 
 public class LoginPage implements ActionListener{
 
-    private IDandPasswords idAndPasswords;
-    boolean login = false;
+    private IDandPasswords idAndPasswords; // stores reference to the credentials storage
+    boolean login = false; // tracks login status
     
+    // swing components for the UI
     JFrame frame = new JFrame();
  
     JButton loginButton = new JButton("Login");
@@ -37,6 +38,13 @@ public class LoginPage implements ActionListener{
     JLabel userNameLabel = new JLabel("Username: ");
     JLabel passwordLabel = new JLabel("Password: ");
 
+    /**
+     * constructs a new LoginPage instance
+     * initializes the GUI components and sets up the action listeners for the buttons
+     * the UI includes fields for username and password input, labels, and buttons for various actions
+     *
+     * @param idAndPasswords an instance of {@code IDandPasswords} used for verifying or registering user credentials
+     */
     public LoginPage(IDandPasswords idAndPasswords) {
         this.idAndPasswords = idAndPasswords;
 
@@ -110,6 +118,13 @@ public class LoginPage implements ActionListener{
         return null;
     }
 
+    /**
+     * handles actions performed on the GUI components, such as button clicks
+     * method is called automatically whenever an action is performed on a component
+     *
+     * @param e action event that was triggered
+     */
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == resetButton) {
             usernamefField.setText("");
