@@ -7,7 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.awt.*;
 
-
+/**
+ * the {@code Airline} class creates a comprehensive user interface for managing flight bookings
+ * includes functionality for searching flights, booking management, user settings, and support
+ * integrates various Swing components to create a dynamic and interactive application
+ */
 public class Airline implements ActionListener {
     JFrame frame = new JFrame();
 
@@ -94,7 +98,14 @@ public class Airline implements ActionListener {
     JButton helpButton = new JButton("Help");
 
     
-
+    /**
+     * constructs a new {@code Airline} window with user information and initializes the GUI components
+     * constructor sets up the interface for flight booking, including search functionality, user profile settings, and booking details
+     *
+     * @param username username of the user
+     * @param userId user ID, used for identifying the user in the system
+     * @param password user's password for authentication purposes
+     */
     public Airline(String username,String userId, String password) {
         usernameLabel = new JLabel(username);
         passwordLabel = new JLabel(password);
@@ -111,8 +122,6 @@ public class Airline implements ActionListener {
         frame.add(Information);
         frame.add(topusername);
         frame.add(topusermoney);
-
-
 
         titleLabel.setBounds(0, 50, 2000, 80);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -236,7 +245,14 @@ public class Airline implements ActionListener {
 
 
 
-    
+    /**
+     * searches the specified text file for flights matching the search term
+     * this method returns a list of search results that contain the search term
+     *
+     * @param filePath path to the text file containing flight data
+     * @param searchTerm term to search for within the flight data
+     * @return list of strings representing the search results
+     */
     public List<String> searchInTextFile(String filePath, String searchTerm) {
         List<String> results = new ArrayList<>();
         try {
@@ -257,6 +273,12 @@ public class Airline implements ActionListener {
     private String selectedSearchResult_a = "";
     private String selectedSearchResult_b ="";
 
+    /**
+     * displays the search results in the user interface
+     * this method updates the GUI to show search results, allowing the user to select from available options
+     *
+     * @param searchResults list of search results to display
+     */
     public void displaySearchResults(List<String> searchResults) {
         searchResultsPanel.removeAll();
 
@@ -303,6 +325,10 @@ public class Airline implements ActionListener {
         searchResultsPanel.repaint();
     }
 
+    /**
+     * calculates and displays the flight time based on selected start and destination airports
+     * this method uses the Haversine formula to calculate the distance between two points and estimates flight time
+     */
     public void calculateAndDisplayFlightTime() {
         if (!selectedSearchResult_a.equals("") && !selectedSearchResult_b.equals("")) {
             String[] airportAData = searchInTextFileForAirport("data/data.txt", selectedSearchResult_a.split(":")[0].trim());
@@ -358,6 +384,12 @@ public class Airline implements ActionListener {
 
 
 
+    /**
+     * handles actions performed on the GUI components
+     * this method responds to user interactions such as button clicks, enabling the functionality for searching, booking, and user settings adjustments
+     *
+     * @param e action event triggered by user interaction
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == searchButton && !searchField.getText().trim().isEmpty()) {
@@ -872,7 +904,12 @@ public class Airline implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error updating booking details.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    /**
+     * the entry point for the application
+     * this main method initializes the {@code Airline} application with user provided arguments
+     *
+     * @param args command line arguments containing the username, user ID, and password
+     */
     public static void main(String[] args) {
         if (args.length >= 3) {
             String username = args[0];
